@@ -3,17 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/thirdFragment">
 
-    <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.mikaela.navigationtest.FirstFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
-        <action
-            android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
-    </fragment>
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.mikaela.navigationtest.SecondFragment"
@@ -29,7 +20,7 @@
         android:label="fragment_third"
         tools:layout="@layout/fragment_third" >
         <action
-            android:id="@+id/action_thirdFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
+            android:id="@+id/action_thirdFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
     </fragment>
 </navigation>

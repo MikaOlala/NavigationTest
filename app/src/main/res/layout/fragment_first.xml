@@ -15,7 +15,6 @@
         android:text="1"
         android:textSize="40sp" />
 
-
     <Button
         android:id="@+id/button"
         android:layout_height="wrap_content"

@@ -21,8 +21,8 @@ public class ThirdFragment extends Fragment {
 
         NavController nav = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
-        Button button = view.findViewById(R.id.button);
-        button.setOnClickListener(v -> nav.navigate(R.id.action_thirdFragment_to_firstFragment));
+        Button next = view.findViewById(R.id.next);
+        next.setOnClickListener(v -> );
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {

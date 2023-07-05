@@ -44,10 +44,4 @@ public class FirstFragment extends Fragment {
 
     public FirstFragment() {
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        nav = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-    }
 }

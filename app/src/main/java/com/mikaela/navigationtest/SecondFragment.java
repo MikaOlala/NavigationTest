@@ -3,7 +3,6 @@ package com.mikaela.navigationtest;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -22,8 +21,8 @@ public class SecondFragment extends Fragment {
 
         NavController nav = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
-        Button button = view.findViewById(R.id.button);
-        button.setOnClickListener(v -> nav.navigate(R.id.action_secondFragment_to_thirdFragment));
+        Button next = view.findViewById(R.id.back);
+        next.setOnClickListener(v -> nav.navigate(R.id.action_secondFragment_to_thirdFragment));
 
         Button back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {
