@@ -1,16 +1,17 @@
 package com.mikaela.navigationtest;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.ArrayDeque;
+import com.mikaela.navigationtest.model.Question;
+import com.mikaela.navigationtest.room.QuestionViewModel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,19 +19,45 @@ import java.util.Map;
 
 public class MainActivity extends FragmentActivity {
 
+    private List<Integer> questionHistory = new ArrayList<>();
     private List<Question> questions = new ArrayList<>();
-    private Map<String, Integer> buttons;
+    private Map<String, Integer> buttons = new HashMap<>();
+    private QuestionViewModel questionViewModel;
+    private NavController nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment);
-        NavController navCo = navHostFragment.getNavController();
+        questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
 
         setList();
+        questionHistory.add(1);
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        nav = navHostFragment.getNavController();
+    }
+
+    public int getCurrentQuestionId() {
+        return questionHistory.get(questionHistory.size()-1);
+    }
+
+    public void nextPage(int nextId) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("questionId", nextId);
+
+        boolean hasPicture = false;
+        for (Question q : questions) {
+            if (q.getId()==nextId) {
+                hasPicture = q.getDrawableName()!=null;
+                break;
+            }
+        }
+
+        if (hasPicture)
+            nav.navigate(R.id.actio);
     }
 
     public void logs(kotlin.collections.ArrayDeque<NavBackStackEntry> backQueue) {
@@ -43,8 +70,8 @@ public class MainActivity extends FragmentActivity {
 
     private void setList() {
         buttons.put("Модный и яркий", 2);
-        buttons.put("Нежный и пастельный", 3);
-        buttons.put("Темный и блестящий", 3);
+        buttons.put("Нежный и пастельный", 7);
+        buttons.put("Темный и блестящий", 9);
         questions.add(new Question(1, "Идеальный цвет маникюра?", null, getButtons()));
         questions.add(new Question(2, "Обожаешь наряжаться?", null, getStandardButtons(3, 5)));
         questions.add(new Question(3, "Любишь ходить по магазинам?", null, getStandardButtons(4, 6)));
@@ -72,6 +99,8 @@ public class MainActivity extends FragmentActivity {
         questions.add(new Question(20, "Ты Муза, изысканная и элегантная", null, null));
 
         Log.i("list", questions.toString());
+
+        questionViewModel.insert(questions);
 
 //        questions.add(new Question(1, "Хочешь иметь крылья?", null, ));
 //        questions.add(new Question(2, "ВСЕ ХОТЯТ", null, ));

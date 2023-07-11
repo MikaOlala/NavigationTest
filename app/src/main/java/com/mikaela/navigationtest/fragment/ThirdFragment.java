@@ -1,4 +1,4 @@
-package com.mikaela.navigationtest;
+package com.mikaela.navigationtest.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,11 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
+import com.mikaela.navigationtest.MainActivity;
+import com.mikaela.navigationtest.R;
 
 public class ThirdFragment extends Fragment {
 
@@ -21,10 +25,7 @@ public class ThirdFragment extends Fragment {
 
         NavController nav = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
-        Button next = view.findViewById(R.id.next);
-        next.setOnClickListener(v -> );
-
-        Button back = view.findViewById(R.id.back);
+        TextView back = view.findViewById(R.id.back);
         back.setOnClickListener(v -> {
             nav.popBackStack();
         });

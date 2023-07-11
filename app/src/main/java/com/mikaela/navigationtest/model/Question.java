@@ -1,11 +1,18 @@
-package com.mikaela.navigationtest;
+package com.mikaela.navigationtest.model;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.Map;
 
+@Entity(tableName = "questions")
 public class Question {
+    @PrimaryKey
     private int id;
     private String question;
     private String drawableName;
+    @TypeConverters(ButtonsMapConverter.class)
     private Map<String, Integer> buttons;
 
     public Question(int id, String question, String drawableName, Map<String, Integer> buttons) {
@@ -37,6 +44,14 @@ public class Question {
 
     public void setDrawableName(String drawableName) {
         this.drawableName = drawableName;
+    }
+
+    public Map<String, Integer> getButtons() {
+        return buttons;
+    }
+
+    public void setButtons(Map<String, Integer> buttons) {
+        this.buttons = buttons;
     }
 
     @Override

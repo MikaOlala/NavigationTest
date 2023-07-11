@@ -3,24 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/thirdFragment">
+    app:startDestination="@id/secondFragment">
 
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.mikaela.navigationtest.SecondFragment"
+        android:name="com.mikaela.navigationtest.fragment.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" >
+        tools:layout="@layout/fragment_second">
         <action
             android:id="@+id/action_secondFragment_to_thirdFragment"
             app:destination="@id/thirdFragment" />
+        <argument
+            android:name="questionId"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <action
+            android:id="@+id/action_stay_second"
+            app:destination="@id/secondFragment" />
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
-        android:name="com.mikaela.navigationtest.ThirdFragment"
+        android:name="com.mikaela.navigationtest.fragment.ThirdFragment"
         android:label="fragment_third"
         tools:layout="@layout/fragment_third" >
         <action
             android:id="@+id/action_thirdFragment_to_secondFragment"
             app:destination="@id/secondFragment" />
+        <argument
+            android:name="questionId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_stay_third"
+            app:destination="@id/thirdFragment" />
     </fragment>
 </navigation>
